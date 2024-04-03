@@ -62,6 +62,11 @@ class UserEntity(EntityBase):
     # Section relations that the user is a part of.
     sections: Mapped[list["SectionMemberEntity"]] = relationship(back_populates="user")
 
+    # Showcase projects that the user has created.
+    showcases: Mapped[list["ShowcaseProjectEntity"]] = relationship(
+        back_populates="author"
+    )
+
     @classmethod
     def from_model(cls, model: User) -> Self:
         """

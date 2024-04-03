@@ -1,0 +1,16 @@
+.project-display {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.project-display img { 
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+mat-card-title,
+mat-card-subtitle {
+  display: block; /* Ensures titles and subtitles wrap as expected */
+}

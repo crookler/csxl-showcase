@@ -1,0 +1,11 @@
+<div *ngFor="let project of projects">
+  <mat-card class="project-card">
+    <mat-card-header>
+      <mat-card-title>{{ project.name }}</mat-card-title>
+      <mat-card-subtitle>{{ project.author }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ project.short_description }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

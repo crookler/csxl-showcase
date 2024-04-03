@@ -41,6 +41,8 @@ import { AboutComponent } from './about/about.component';
 import { GateComponent } from './gate/gate.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { SharedModule } from './shared/shared.module';
+import { ShowcaseRoutingModule } from './showcase/showcase-routing.module';
+import { ShowcaseModule } from './showcase/showcase.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     LayoutModule,
     ReactiveFormsModule,
+    ShowcaseModule,
 
     /* Material UI */
     MatButtonModule,
@@ -88,7 +91,8 @@ import { SharedModule } from './shared/shared.module';
           return localStorage.getItem('bearerToken');
         }
       }
-    })
+    }),
+    ShowcaseRoutingModule
   ],
   providers: [
     {

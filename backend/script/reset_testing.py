@@ -18,7 +18,13 @@ from ..database import engine
 from ..env import getenv
 from .. import entities
 
-from ..test.services import role_data, user_data, permission_data, room_data
+from ..test.services import (
+    role_data,
+    user_data,
+    permission_data,
+    room_data,
+    showcase_data,
+)
 from ..test.services.organization import organization_test_data
 from ..test.services.event import event_test_data
 from ..test.services.coworking import seat_data, operating_hours_data, time
@@ -55,6 +61,6 @@ with Session(engine) as session:
     room_data.insert_fake_data(session)
     seat_data.insert_fake_data(session)
     reservation_data.insert_fake_data(session, time)
-
+    showcase_data.insert_fake_data(session)
     # Commit changes to the database
     session.commit()
