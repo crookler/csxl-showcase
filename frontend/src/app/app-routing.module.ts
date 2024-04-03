@@ -42,6 +42,12 @@ const routes: Routes = [
     title: 'Experimental',
     loadChildren: () =>
       import('./event/event.module').then((m) => m.EventModule)
+  },
+  {
+    path: 'showcase',
+    title: 'Showcases',
+    loadChildren: () =>
+      import('./showcase/showcase.module').then((m) => m.ShowcaseModule)
   }
 ];
 

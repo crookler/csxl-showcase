@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Profile } from '/workspace/frontend/src/app/profile/profile.service';
-import { Project } from '../projects/project.model';
+import { Project } from '../../project.model';
 
 @Component({
   selector: 'project-card',
   templateUrl: './project-card.widget.html',
   styleUrls: ['./project-card.widget.css']
 })
-export class ProjectCardComponent {
+export class ProjectCard {
   @Input() project!: Project;
   /** The profile of the currently signed in user */
   @Input() profile?: Profile;

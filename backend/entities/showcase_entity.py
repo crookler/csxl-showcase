@@ -17,15 +17,12 @@ class ShowcaseProjectEntity(EntityBase):
     long_description: Mapped[str] = mapped_column(String)
     website: Mapped[str] = mapped_column(String)
     email: Mapped[str] = mapped_column(String)
-    author_pid: Mapped[int] = mapped_column(ForeignKey("user.pid"))
+    author: Mapped[str] = mapped_column(String)
     linked_in: Mapped[str] = mapped_column(String)
     heel_life: Mapped[str] = mapped_column(String)
     public: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     slug: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     shorthand: Mapped[str] = mapped_column(String)
-
-    # Establish one-to-many relationship for authors and projects (one author can have many projects)
-    author: Mapped["UserEntity"] = relationship(back_populates="showcases")
 
     @classmethod
     def from_model(cls, model: ShowcaseProject) -> Self:
@@ -37,7 +34,7 @@ class ShowcaseProjectEntity(EntityBase):
             long_description=model.long_description,
             website=model.website,
             email=model.email,
-            author_pid=model.author.pid,
+            author=model.author,
             linked_in=model.linked_in,
             heel_life=model.heel_life,
             public=model.public,
@@ -54,7 +51,7 @@ class ShowcaseProjectEntity(EntityBase):
             long_description=self.long_description,
             website=self.website,
             email=self.email,
-            author=self.author.to_model(),
+            author=self.author,
             linked_in=self.linked_in,
             heel_life=self.heel_life,
             public=self.public,

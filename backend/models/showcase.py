@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from .user import User
 
 
 class ShowcaseProject(BaseModel):
@@ -10,7 +9,7 @@ class ShowcaseProject(BaseModel):
     long_description: str
     website: str
     email: str
-    author: User
+    author: str
     linked_in: str
     heel_life: str
     public: bool
