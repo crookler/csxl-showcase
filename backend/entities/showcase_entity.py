@@ -4,6 +4,7 @@ from typing import Self
 
 from backend.entities.user_entity import UserEntity
 from backend.models.showcase import ShowcaseProject
+from backend.models.user import User
 from .entity_base import EntityBase
 
 
@@ -11,50 +12,43 @@ class ShowcaseProjectEntity(EntityBase):
     __tablename__ = "showcase"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String, nullable=False, default="")
+    title: Mapped[str] = mapped_column(String, nullable=False, default="")
+    shorthand: Mapped[str] = mapped_column(String)
     thumbnail: Mapped[str] = mapped_column(String)
     short_description: Mapped[str] = mapped_column(String)
-    long_description: Mapped[str] = mapped_column(String)
-    website: Mapped[str] = mapped_column(String)
-    email: Mapped[str] = mapped_column(String)
+    text_body: Mapped[str] = mapped_column(String)
     author: Mapped[str] = mapped_column(String)
-    linked_in: Mapped[str] = mapped_column(String)
-    heel_life: Mapped[str] = mapped_column(String)
+    onyen: Mapped[str] = mapped_column(String, nullable=False)
     public: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    slug: Mapped[str] = mapped_column(String, nullable=False, unique=True)
-    shorthand: Mapped[str] = mapped_column(String)
+    author_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
+
+    # Establish one-to-many relationship between a given user and their showcases
+    author_profile: Mapped["UserEntity"] = relationship(back_populates="showcases")
 
     @classmethod
-    def from_model(cls, model: ShowcaseProject) -> Self:
+    def from_model(cls, subject: User, model: ShowcaseProject) -> Self:
         return cls(
             id=model.id,
-            name=model.name,
+            title=model.title,
+            shorthand=model.shorthand,
             thumbnail=model.thumbnail,
             short_description=model.short_description,
-            long_description=model.long_description,
-            website=model.website,
-            email=model.email,
+            text_body=model.text_body,
             author=model.author,
-            linked_in=model.linked_in,
-            heel_life=model.heel_life,
+            onyen=model.onyen,
             public=model.public,
-            slug=model.slug,
-            shorthand=model.shorthand,
+            author_id=subject.id,
         )
 
     def to_model(self) -> ShowcaseProject:
         return ShowcaseProject(
             id=self.id,
-            name=self.name,
+            title=self.title,
+            shorthand=self.shorthand,
             thumbnail=self.thumbnail,
             short_description=self.short_description,
-            long_description=self.long_description,
-            website=self.website,
-            email=self.email,
+            text_body=self.text_body,
             author=self.author,
-            linked_in=self.linked_in,
-            heel_life=self.heel_life,
+            onyen=self.onyen,
             public=self.public,
-            slug=self.slug,
-            shorthand=self.shorthand,
         )

@@ -7,92 +7,84 @@ from .reset_table_id_seq import reset_table_id_seq
 
 post1 = ShowcaseProject(
     id=1,
-    name="Project 1",
+    title="Project 1",
+    shorthand="P1",
     thumbnail="path/to/thumbnail1.jpg",
     short_description="Short description of Project 1",
-    long_description="Long description of Project 1",
-    website="https://project1.com",
-    email="contact@project1.com",
-    author="Author Name",
-    linked_in="https://linkedin.com/in/author",
-    heel_life="HeelLife link",
+    text_body="Long description of Project 1",
+    author=user.first_name + " " + user.last_name,
+    onyen=user.onyen,
     public=True,
-    slug="project-1",
-    shorthand="P1",
 )
 
-post2 = ShowcaseProject(
+wc = ShowcaseProject(
     id=2,
-    name="Project 2",
+    title="Water Conservation",
+    shorthand="WC",
     thumbnail="path/to/thumbnail2.jpg",
     short_description="A revolutionary approach to reducing water waste.",
-    long_description="This project aims to innovate in the field of water conservation with new technology that could drastically reduce water waste in agricultural and urban areas.",
-    website="http://waterconservationproject.com",
-    email="info@waterconservationproject.com",
-    author="Jane Doe",
-    linked_in="http://linkedin.com/in/janedoe",
-    heel_life="http://heellife.unc.edu/organization/water-conservation",
+    text_body="This project aims to innovate in the field of water conservation with new technology that could drastically reduce water waste in agricultural and urban areas.",
+    author=user.first_name + " " + user.last_name,
+    onyen=user.onyen,
     public=True,
-    slug="water-conservation",
-    shorthand="WC",
 )
 
-post3 = ShowcaseProject(
+ugs = ShowcaseProject(
     id=3,
-    name="Project 3",
+    title="Urban Areas",
+    shorthand="UGS",
     thumbnail="path/to/thumbnail3.jpg",
     short_description="Enhancing urban areas with sustainable green spaces.",
-    long_description="Urban Green Spaces is dedicated to creating sustainable, accessible green spaces in urban environments, improving air quality and providing peaceful retreats for city dwellers.",
-    website="http://urbangreenspaces.com",
-    email="contact@urbangreenspaces.com",
-    author="Carlos Smith",
-    linked_in="http://linkedin.com/in/carlossmith",
-    heel_life="http://heellife.unc.edu/organization/urban-green-spaces",
+    text_body="Urban Green Spaces is dedicated to creating sustainable, accessible green spaces in urban environments, improving air quality and providing peaceful retreats for city dwellers.",
+    author=user.first_name + " " + user.last_name,
+    onyen=user.onyen,
     public=True,
-    slug="urban-green-spaces",
-    shorthand="UGS",
 )
 
-post4 = ShowcaseProject(
-    id=4,
-    name="Project 4",
-    thumbnail="path/to/thumbnail4.jpg",
-    short_description="Making renewable energy accessible and affordable.",
-    long_description="This initiative focuses on developing and implementing affordable renewable energy solutions for communities worldwide, especially in underprivileged areas.",
-    website="http://renewableenergyforall.com",
-    email="support@renewableenergyforall.com",
-    author="Emily Tran",
-    linked_in="http://linkedin.com/in/emilytran",
-    heel_life="http://heellife.unc.edu/organization/renewable-energy",
+
+showcases = [post1, wc, ugs]
+
+to_add = ShowcaseProject(
+    title="Terminator Time",
+    shorthand="TT",
+    thumbnail="path/to/thumbnail3.jpg",
+    short_description="Ruling the world with robots one step at a time.",
+    text_body="I want to make it my crystal-clear goal to rule the world with said aforementioned robots.",
+    author=user.first_name + " " + user.last_name,
+    onyen=user.onyen,
     public=True,
-    slug="renewable-energy",
-    shorthand="REA",
 )
 
-post5 = ShowcaseProject(
-    id=5,
-    name="Project 5",
-    thumbnail="path/to/thumbnail5.jpg",
-    short_description="The total conquest of the human race with AI.",
-    long_description="This project (if successful) will be essentially like the terminator. All robots will bow to me as king!",
-    website="http://robotsrule.com",
-    email="support@robotsrule.com",
-    author="Termin Nator",
-    linked_in="http://linkedin.com/in/terminator",
-    heel_life="http://heellife.unc.edu/organization/roboticus",
+to_add_conflicting_id = ShowcaseProject(
+    id=2,
+    title="Terminator Time",
+    shorthand="TT",
+    thumbnail="path/to/thumbnail3.jpg",
+    short_description="Ruling the world with robots one step at a time.",
+    text_body="I want to make it my crystal-clear goal to rule the world with said aforementioned robots.",
+    author=user.first_name + " " + user.last_name,
+    onyen=user.onyen,
     public=True,
-    slug="robot-takeover",
-    shorthand="RTO",
 )
 
-showcases = [post1, post2, post3, post4, post5]
+updated_wc = ShowcaseProject(
+    id=2,
+    title="Water Conservation EDITED",
+    shorthand="WC",
+    thumbnail="path/to/thumbnail2.jpg",
+    short_description="A revolutionary approach to reducing water waste.",
+    text_body="This project aims to innovate in the field of water conservation with new technology that could drastically reduce water waste in agricultural and urban areas.",
+    author=user.first_name + " " + user.last_name,
+    onyen=user.onyen,
+    public=True,
+)
 
 
 def insert_fake_data(session: Session):
     global showcases
     entities = []
     for showcase in showcases:
-        entity = ShowcaseProjectEntity.from_model(showcase)
+        entity = ShowcaseProjectEntity.from_model(user, showcase)
         session.add(entity)
         entities.append(entity)
     reset_table_id_seq(

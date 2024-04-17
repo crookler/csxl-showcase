@@ -11,3 +11,33 @@ export const showcaseResolver: ResolveFn<Project[] | undefined> = (
 ) => {
   return inject(ShowcaseService).getProjects();
 };
+
+export const showcaseEditorResolver: ResolveFn<Project | undefined> = (
+  route,
+  state
+) => {
+  // If a showcase is being created, return blank project
+  if (route.params['id'] == '0') {
+    return {
+      id: null,
+      title: '',
+      shorthand: '',
+      thumbnail: '',
+      short_description: '',
+      text_body: '',
+      author: '',
+      onyen: '',
+      public: false
+    };
+  }
+
+  // If editing, return the selected organization if it exists
+  return inject(ShowcaseService)
+    .getProject(Number(route.params['id']))
+    .pipe(
+      catchError((error) => {
+        console.log(error);
+        return of(undefined);
+      })
+    );
+};

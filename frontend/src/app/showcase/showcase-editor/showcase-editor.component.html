@@ -1,0 +1,67 @@
+<form [formGroup]="showcaseForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title *ngIf="this.showcase_id === '0'; else update">
+        Create Showcase
+      </mat-card-title>
+      <ng-template #update>
+        <mat-card-title> Update Project </mat-card-title>
+      </ng-template>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Showcase Title</mat-label>
+        <input
+          matInput
+          placeholder=""
+          formControlName="title"
+          name="title"
+          required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Shorthand</mat-label>
+        <input
+          matInput
+          placeholder=""
+          formControlName="shorthand"
+          name="shorthand"
+          required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Thumbnail</mat-label>
+        <input
+          matInput
+          placeholder=""
+          formControlName="thumbnail"
+          name="thumbnail"
+          required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Short Description</mat-label>
+        <input
+          matInput
+          placeholder=""
+          formControlName="short_description"
+          name="short_description"
+          required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Text Body</mat-label>
+        <input
+          matInput
+          placeholder=""
+          formControlName="text_body"
+          name="text_body"
+          required />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-stroked-button
+        type="submit"
+        [disabled]="showcaseForm.invalid">
+        Save
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

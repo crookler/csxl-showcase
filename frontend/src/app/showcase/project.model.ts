@@ -1,15 +1,24 @@
+/* eslint-disable prettier/prettier */
 export interface Project {
   id: number | null;
-  name: string;
+  title: string;
+  shorthand: string;
   thumbnail: string;
   short_description: string;
-  long_description: string;
-  website: string;
-  email: string;
+  text_body: string;
   author: string;
-  linked_in: string;
-  heel_life: string;
+  onyen: string;
   public: boolean;
-  slug: string;
+}
+
+export interface ProjectResponse{
+  id: number | null;
+  title: string;
   shorthand: string;
+  thumbnail: string;
+  short_description: string;
+  text_body: string;
+  author: string;
+  onyen: string;
+  public: boolean;
 }

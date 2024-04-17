@@ -6,6 +6,7 @@ import { Route } from '@angular/router';
 import { Project } from '../project.model';
 import { showcaseResolver } from '../showcase.resolver';
 import { ActivatedRoute } from '@angular/router';
+import { Profile } from 'src/app/profile/profile.service';
 
 @Component({
   selector: 'app-showcase',
@@ -18,15 +19,19 @@ export class ShowcaseComponent {
     component: ShowcaseComponent,
     title: 'Showcase',
     canActivate: [isAuthenticated],
-    resolve: { profile: profileResolver, projects: showcaseResolver }
+    resolve: { profile: profileResolver, projects: showcaseResolver },
+
   };
 
   public projects: Project[];
+  public profile: Profile;
 
   constructor(private route: ActivatedRoute) {
     const data = this.route.snapshot.data as {
+      profile: Profile;
       projects: Project[];
     };
+    this.profile = data.profile;
     this.projects = data.projects;
   }
 }

@@ -1,6 +1,9 @@
+/* eslint-disable prettier/prettier */
 import { Component, Input } from '@angular/core';
 import { Profile } from '/workspace/frontend/src/app/profile/profile.service';
 import { Project } from '../../project.model';
+import { Router } from '@angular/router';
+import { ShowcaseService } from '../../showcase.service';
 
 @Component({
   selector: 'project-card',
@@ -8,9 +11,10 @@ import { Project } from '../../project.model';
   styleUrls: ['./project-card.widget.css']
 })
 export class ProjectCard {
+  /**the project being displayed */
   @Input() project!: Project;
   /** The profile of the currently signed in user */
-  @Input() profile?: Profile;
+  @Input() profile!: Profile;
   /** @deprecated Stores the permission values for a profile */
   @Input() profilePermissions!: Map<number, number>;
 
@@ -20,5 +24,21 @@ export class ProjectCard {
    * @returns {boolean}
    *
    */
-  constructor() {}
+  constructor(private router: Router,private showcaseService: ShowcaseService) {}
+
+editProject(){
+    this.router.navigate(['/showcase', this.project.id, 'edit']);
+    
+  }
+
+  deleteProject(){
+    this.showcaseService.deleteProject(this.project.id as number).subscribe(() => {
+     window.location.reload();
+    
+  });
+  
+  
 }
+}
+
+

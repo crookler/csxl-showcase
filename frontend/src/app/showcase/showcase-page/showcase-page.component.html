@@ -1,11 +1,28 @@
-<div *ngFor="let project of projects">
-  <mat-card class="project-card">
-    <mat-card-header>
-      <mat-card-title>{{ project.name }}</mat-card-title>
-      <mat-card-subtitle>{{ project.author }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ project.short_description }}</p>
-    </mat-card-content>
-  </mat-card>
+<!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
+
+
+<div class="page-container">
+  <!-- Search Bar -->
+
+
+  <!-- Organizations -->
+  <div class="project-cards">
+    <!-- Display card for each organization, potentially filtered based on the search query. -->
+    <project-card class="card" *ngFor="
+        let project of projects 
+      " [project]="project" [profile]="profile" />
+  </div>
 </div>
+
+<mat-toolbar color="primary">
+  <div class="toolbar">
+    <button mat-stroked-button class="link-button" routerLink="/showcase/0/edit">create</button>
+  </div>
+</mat-toolbar>
+
+<!--  <button
+      mat-stroked-button
+      (click)="router.navigate(['/productivity/edit/new'])">
+      Create Timer
+    </button>-->
