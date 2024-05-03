@@ -54,7 +54,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./ta-application/ta-application.module').then(
         (m) => m.ApplicationsModule
-      )
+      )  
+  },
+  {
+    path: 'showcase',
+    title: 'Showcases',
+    loadChildren: () =>
+      import('./showcase/showcase.module').then((m) => m.ShowcaseModule)
   }
 ];
 

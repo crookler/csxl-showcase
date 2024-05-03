@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <!-- Event Detail Card -->
 <mat-card class="event-detail-card" appearance="outlined">
   <!-- Title Section -->
@@ -30,9 +31,7 @@
   <mat-divider id="top-divider" />
 
   <!-- Organization Section -->
-  <div
-    class="organization-section"
-    [routerLink]="'/organizations/' + event.organization!.slug">
+  <div class="organization-section" [routerLink]="'/organizations/' + event.organization!.slug">
     <!-- Organization Icon -->
     <img mat-card-image src="{{ event.organization!.logo }}" class="logo" />
     <!-- Organization Name -->
@@ -55,12 +54,8 @@
   </div>
 
   <!-- Organizers -->
-  <div
-    class="organizers-information"
-    *ngIf="profile && event.organizers.length > 0">
-    <ng-container
-      class="organizers-text"
-      *ngIf="event.organizers.length > 1; else singleOrganizer">
+  <div class="organizers-information" *ngIf="profile && event.organizers.length > 0">
+    <ng-container class="organizers-text" *ngIf="event.organizers.length > 1; else singleOrganizer">
       If you have any questions or concerns about this event, please contact one
       of the organizers below:
     </ng-container>
@@ -70,32 +65,23 @@
     </ng-template>
     <br />
 
-    <user-chip-list
-      [users]="event.organizers"
-      [enableMailTo]="true"></user-chip-list>
+    <user-chip-list [users]="event.organizers" [enableMailTo]="true"></user-chip-list>
   </div>
 
   <!-- Register Button -->
-  <div
-    class="registration-information"
-    *ngIf="profile && event.registration_limit > 0">
+  <div class="registration-information" *ngIf="profile && event.registration_limit > 0">
     <mat-divider class="padded-divider" />
     <p>
       <strong>Seats Remaining:</strong>
       {{ event.registration_limit - event.registration_count }} / {{
       event.registration_limit }}
     </p>
-    <button
-      mat-stroked-button
-      [disabled]="event.is_organizer"
-      (click)="unregisterForEvent(event.id!)"
+    <button mat-stroked-button [disabled]="event.is_organizer" (click)="unregisterForEvent(event.id!)"
       *ngIf="event.is_attendee || event.is_organizer; else register">
       Unregister
     </button>
     <ng-template #register>
-      <button
-        mat-stroked-button
-        [disabled]="event.registration_count === event.registration_limit"
+      <button mat-stroked-button [disabled]="event.registration_count === event.registration_limit"
         (click)="registerForEvent(event.id!)">
         Register
       </button>

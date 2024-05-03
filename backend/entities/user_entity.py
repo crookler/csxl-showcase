@@ -69,6 +69,11 @@ class UserEntity(EntityBase):
         back_populates="user"
     )
 
+    # Showcases that the user has created
+    showcases: Mapped[list["ShowcaseProjectEntity"]] = relationship(
+        back_populates="author_profile"
+    )
+
     @classmethod
     def from_model(cls, model: User) -> Self:
         """
