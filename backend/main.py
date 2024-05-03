@@ -17,6 +17,7 @@ from .api import (
     authentication,
     user,
     room,
+    application,
     showcase,
 )
 from .api.coworking import status, reservation, ambassador, operating_hours
@@ -47,6 +48,7 @@ app = FastAPI(
         user.openapi_tags,
         organizations.openapi_tags,
         events.openapi_tags,
+        application.openapi_tags,
         reservation.openapi_tags,
         room.openapi_tags,
         course.openapi_tags,
@@ -78,6 +80,7 @@ feature_apis = [
     course,
     section,
     room,
+    application,
     showcase,
 ]
 
